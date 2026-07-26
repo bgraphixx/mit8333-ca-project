@@ -1,0 +1,21 @@
+# Auto-merged by `docker compose up` for local development only — publishes
+# host ports so you can hit localhost:8080 / :5173 / :5433 directly.
+#
+# Dokploy deploys with `docker compose -f ./docker-compose.yml up`, an
+# explicit -f that does NOT auto-include this file, so none of this reaches
+# production. Publishing these same ports there caused deploys to collide
+# with whatever else already holds them on the host ("port is already
+# allocated") — Dokploy's Traefik reaches containers over the internal
+# Docker network directly, it doesn't need them published.
+services:
+  db:
+    ports:
+      - "5433:5432"
+
+  backend:
+    ports:
+      - "8080:8080"
+
+  frontend:
+    ports:
+      - "5173:80"

@@ -7,16 +7,12 @@ services:
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
       - POSTGRES_DB=${POSTGRES_DB:-maintenance_db}
-    ports:
-      - "5433:5432"
 
   backend:
     build: ./backend
     command: uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload
     volumes:
       - ./backend:/app
-    ports:
-      - "8080:8080"
     environment:
       - POSTGRES_USER=${POSTGRES_USER:-postgres}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
@@ -31,8 +27,6 @@ services:
 
   frontend:
     build: ./frontend
-    ports:
-      - "5173:80"
     depends_on:
       - backend
 
