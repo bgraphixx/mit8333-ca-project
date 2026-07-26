@@ -19,9 +19,6 @@ services:
       - POSTGRES_DB=${POSTGRES_DB:-maintenance_db}
       - POSTGRES_SERVER=${POSTGRES_SERVER:-db}
       - POSTGRES_PORT=${POSTGRES_PORT:-5432}
-      # No fallback on purpose — required, see app/core/config.py. Locally
-      # this comes from the backend/.env bind mount above; on Dokploy (no
-      # such mount) it must be set as an environment variable on the app.
       - SECRET_KEY=${SECRET_KEY}
       - ALGORITHM=${ALGORITHM:-HS256}
       - ACCESS_TOKEN_EXPIRE_MINUTES=${ACCESS_TOKEN_EXPIRE_MINUTES:-30}
